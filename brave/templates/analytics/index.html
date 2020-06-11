@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<h3>View Analytics for,</h3>
+<br>
+<a href="{% url 'dashboard_with_pivot' %}"><p><h5><b> Users by Departments</b></h5></p></a>
+<br>
+<a href="{% url 'dashboard_with_pivot2' %}"><p><h5><b> Equipment Utilization</b></h5></p></a>
+<br>
+<a href=""><p><h5><b> Mileage Calculator</b></h5></p></a>
+<br>
+<a href=""><p><h5><b> Scheduling, Shows & Events</b></h5></p></a>
+
+{% endblock %}

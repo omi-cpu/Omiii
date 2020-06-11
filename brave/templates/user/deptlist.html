@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+{% block content %}
+
+<div class="row card bg-white" style="margin-top:25px;">
+      <div align="left">
+          <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" style="margin-top:15px;" aria-label="Search">
+        </form>
+      </div>
+<div align="right">
+    <a href="{% url 'deptf' %}"><button type="submit" class="btn btn-primary text-white">Add Department</button></a>
+</div>
+
+<form action="" method="post">
+       {% csrf_token %}
+<div align="center" class="mt-2" >
+<table class="table text-white">
+    <thead>
+        <tr class="table-white">
+            <th>Name of Department</th>  <th>Created At</th>  <th>Updated At</th>
+    </thead>
+    <tbody>
+        {% for department in object_list %}
+        <tr class="table-white">
+            <td> {{ department.name }} </td>  <td> {{ department.created_at}} </td> <td> {{ department.updated_at }} </td>
+        </tr>
+        {% empty %}
+    <ul><li>No Departments</li></ul>
+        {% endfor %}
+    </tbody>
+
+</table>
+</div>
+</form>
+</div>
+
+{% endblock %}

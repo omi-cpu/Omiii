@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top:25px;">
+                            <div class="col-lg-6 col-xs-12 col-sm-12" style="width:1120px;">
+                                <!-- BEGIN PORTLET-->
+                                <div class="portlet">
+                                    <div class="portlet-body">
+                                        <div class="col-lg-1"></div>
+                                        <div class="col-lg-2">
+                                             <div class="card">
+                                                 <a href="{% url 'ho' %}">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/download.png' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>Home</b></p>
+                                                 </a>
+                                             </div>
+                                             <div class="card">
+                                                 <a href="{% url 'doc' %}">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/doc.png' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>Docs</b></p>
+                                                 </a>
+                                             </div>
+                                             <div class="card">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/ac.jfif' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>Administration</b></p>
+                                             </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="card">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/comm.jfif' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>Communication</b></p>
+                                            </div>
+                                            <div class="card">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/is.png' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>Issues</b></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                             <div class="card">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/hash.jfif' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>Awards</b></p>
+                                             </div>
+                                             <div class="card">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/rp.jfif' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>Reports</b></p>
+                                             </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="card">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/sch.png' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>Scheduling</b></p>
+                                            </div>
+                                            <div class="card">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/ccc.png' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>Content Calendar</b></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="card">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/st.png' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>store Manager</b></p>
+                                            </div>
+                                             <div class="card">
+                                                <div class="column" style="height:100px;"> <img src="{% static 'img/bt.png' %}" height="45px;" style="margin-left:4.5px;"> </div>
+                                                <p class="title" style="margin-left:6.5px;"><b>Logistics</b></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1"></div>
+                                    </div>
+
+                                    </div>
+                                </div>
+                                <!-- END PORTLET-->
+                            </div>
+                        </div>
+{% endblock %}

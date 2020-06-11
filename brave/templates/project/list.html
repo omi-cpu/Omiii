@@ -1,0 +1,30 @@
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+{% block content %}
+<div align="right">
+    <a href="{% url 'rf' %}"><button type="submit" class="btn btn-primary text-white">Create Event</button></a>
+</div>
+
+<form action="" method="post">
+       {% csrf_token %}
+<div align="center" class="mt-2" >
+<table class="table text-white">
+    <thead>
+        <tr class="table-white">
+            <th>Name of Project</th>  <th>Team Lead</th>  <th>Genre</th> <th>Start Date</th> <th>End Date</th> <th>Delivery date</th> <th>Country</th> <th>Venue/Location</th> <th>Status</th> <th>Distribution Platform</th> <th>Brief of Project</th>
+    </thead>
+    <tbody>
+        {% for project in object_list %}
+        <tr class="table-white">
+            <td> {{ project.project_name }} </td>  <td> {{project.team_lead}} </td> <td> {{ project.genre }} </td><td> {{ project.start_date }} </td><td> {{ project.end_date }} </td><td> {{ project.delivery_date }} </td><td> {{ project.country }} </td><td> {{ project.venue_location }} </td><td> {{ project.status }} </td><td> {{ project.distribution_platform }} </td><td> {{ project.project_brief }} </td>
+        </tr>
+        {% empty %}
+    <ul><li>No Events to display</li></ul>
+        {% endfor %}
+    </tbody>
+
+</table>
+</div>
+</form>
+
+{% endblock %}

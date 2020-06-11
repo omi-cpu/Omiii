@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+{% block content %}
+
+<div class="row bg-white" style="margin-top:25px;">
+<div align="right">
+    <a href="{% url 'trf' %}"><button type="submit" class="btn btn-primary text-white">Create</button></a>
+</div>
+
+<form action="" method="post">
+       {% csrf_token %}
+<div align="center" class="mt-2" >
+<table class="table text-white">
+    <thead>
+        <tr class="table-white">
+            <th>Number Plate</th>  <th>Production Name</th>  <th>Trip Date</th> <th>Designated Driver</th> <th>Odometer Start</th> <th>Odometer Stop</th> <th>Trip Information</th> <th>Trip Distance</th> <th>Fuel Station</th>
+    </thead>
+    <tbody>
+        {% for triplog in object_list %}
+        <tr class="table-white">
+            <td> {{ triplog.plate_number }} </td>  <td> {{ triplog.production_name}} </td> <td> {{ triplog.date}} </td><td>{{ triplog.driver}} </td> <td> {{ triplog.odometer_start}} </td> <td> {{ triplog.odometer_stop}} </td> <td> {{ triplog.trip_information }} </td> <td>{{ triplog.trip_distance }}</td><td>{{triplog.fuel_station_used}}</td>
+        </tr>
+        {% empty %}
+    <ul><li>No Data</li></ul>
+        {% endfor %}
+    </tbody>
+
+</table>
+</div>
+</form>
+</div>
+
+{% endblock %}

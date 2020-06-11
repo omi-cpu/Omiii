@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card bg-white" style="width: 350px;">
+            <div class="card-body">
+                <h4 class="card-title"><b>Available Items</b></h4>
+                <hr/>
+            </div>
+            <div class="card-body">
+            <div align="left">
+              <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+              <i class="fas fa-search" aria-hidden="true"></i>
+              <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" style="margin-top:15px;" aria-label="Search">
+              </form>
+            </div>
+                {% for store in object_list %}
+                {% if store.assigned_department == user.department %}
+                <table class="table text-white mt-2">
+                    <thead>
+                    <tr class="table-white">
+                        <th>Serial No.</th><th></th><th>Item Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-white">
+                    <td>{{ store.serial_no }}</td><td></td><td>{{ store.item_name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% elif user.is_staff %}
+                <table class="table text-white mt-2">
+                    <thead>
+                    <tr class="table-white">
+                        <th>Serial No.</th><th></th><th>Item Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-white">
+                    <td>{{ store.serial_no }}</td><td></td><td>{{ store.item_name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+                {% endfor %}
+      </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-white" style="width: 350px;">
+            <div class="card-body">
+                <h4 class="card-title"><b>Items you Requested</b></h4>
+                <hr/>
+            </div>
+            <div class="card-body">
+                <div align="left">
+                    <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" style="margin-top:15px;" aria-label="Search">
+                    </form>
+                </div>
+                {% for store in object_list %}
+                {% if store.requested == True %}
+                <table class="table text-white mt-2">
+                    <thead>
+                    <tr class="table-white">
+                        <th>Serial No.</th><th></th><th>Item Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-white">
+                    <td>{{ store.serial_no }}</td><td></td><td>{{ store.item_name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card bg-white" style="width: 950px; ">
+  <div class="card-body">
+      <h4 class="card-title"><b>Closed Requests</b></h4>
+      <hr/>
+  </div>
+  <div class="card-body">
+    <div align="left">
+          <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" style="margin-top:15px;" aria-label="Search">
+        </form>
+      </div>
+      {% for store in object_list %}
+                {% if store.close_request == True %}
+                <table class="table text-white mt-2">
+                    <thead>
+                    <tr class="table-white">
+                        <th>Serial No.</th><th></th><th>Item Name</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-white">
+                    <td>{{ store.serial_no }}</td><td></td><td>{{ store.item_name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% endif %}
+                {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

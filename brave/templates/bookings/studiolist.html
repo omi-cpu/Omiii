@@ -1,0 +1,15 @@
+{% extends "calendar.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <a href="{% url 'studio' %}"><button>Book A Studio </button></a>
+        <div id="calendar"></div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content-wide %}
+<table class="table table-striped table-bordered table-hover">
+  <tr>
+    <th>Staff Member</th>
+    <th>Roles</th>
+    <th>Shifts</th>
+    {% for date in dates %}
+    <th>{{ date|date:"D" }}<br/>{{ date|date:"d_M" }}<br/>{{ date|date:"Y" }}</th>
+    {% endfor %}
+  </tr>
+  <tr>
+    {% for department in depts %}
+    <td>{{ name }}</td>
+     {% endfor %}
+    {% for staff_member, staff_roster in roster.items %}
+    <td>{{ staff_member }}</td>
+    {% for key, value in staff_roster.items %}
+    <td>{{ value }}</td>
+    {% endfor %}
+    {% endfor %}
+  </tr>
+
+
+</table>
+<h4>Roster By Staff:</h4>
+{% endblock content-wide %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+{% block content %}
+
+<div class="row bg-white" style="margin-top:25px;">
+<div align="right">
+    <a href="{% url 'mtf' %}"><button type="submit" class="btn btn-primary text-white">Calculate Mileage</button></a>
+</div>
+<h4>Mileage Calculator Container</h4>
+    <hr>
+<form action="" method="post">
+       {% csrf_token %}
+<div align="center" class="mt-2" >
+<table class="table text-white">
+    <thead>
+        <tr class="table-white">
+            <th>Number Plate</th>  <th>Odometer Reading</th>  <th>Refuel Date</th> <th>Fuel Added (Litres)</th> <th>Fuel Cost</th>
+    </thead>
+    <tbody>
+        {% for mileage in object_list %}
+        <tr class="table-white">
+            <td> {{ mileage.plate_number }} </td>  <td> {{ mileage.odometer_reading}} </td> <td> {{ mileage.refuel_date}} </td> <td> {{ mileage.fuel_added}} </td> <td> {{ mileage.fuel_cost}} </td>
+        </tr>
+        {% empty %}
+    <ul><li>No Data</li></ul>
+        {% endfor %}
+    </tbody>
+
+</table>
+</div>
+</form>
+</div>
+{% endblock %}

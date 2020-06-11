@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+{% block content %}
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Store</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">All Requested Items</button>
+  <button class="tablinks" onclick="openCity(event, 'Japan')">All Approved Items</button>
+</div>
+
+<div id="Paris" class="tabcontent">
+    <div align="center" class="mt-2" >
+        <div class="card bg-white">
+            <div align="left">
+              <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+              <i class="fas fa-search" aria-hidden="true" ></i>
+              <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" style="margin-top:15px;" aria-label="Search">
+              </form>
+            </div>
+<table class="table text-white">
+    <thead>
+        <tr class="table-white">
+            <th></th><th>Item Name</th>  <th>Created At</th> <th>Last Updated</th> <th>Serial No</th> <th>State</th> <th>Assigned Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for store in object_list %}
+        <tr class="table-white">
+            <td>#<td> {{ store.item_name }} </td>  <td> {{ store.created_at }} </td> <td>{{ store.updated_at }}</td> <td>{{ store.serial_no}}</td> <td>{{ store.state }}</td> <td>{{ store.assigned_department }}</td>
+        </tr>
+        {% empty %}
+        <div style="height:10px;"> <img src="{% static 'img/search.png' %}" height="45px;" style="margin-left:6px; margin-top:25px;"> </div>
+        <div style="margin-top:65px; margin-left:17px;"> No data found</div>
+        {% endfor %}
+    </tbody>
+
+</table></div>
+</div>
+</div>
+
+<div id="Tokyo" class="tabcontent">
+    <div class="card bg-white">
+  <div align="left">
+          <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" style="margin-top:15px;" aria-label="Search">
+        </form>
+      </div>
+    {% for store in object_list %}
+    <table class="table text-white">
+        {% if store.requested == True %}
+    <thead>
+        <tr class="table-white">
+            <th></th><th>Item Name</th>  <th>Created At</th> <th>Last Updated</th> <th>Serial No</th> <th>State</th> <th>Assigned Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-white">
+            <td>#<td> {{ store.item_name }} </td>  <td> {{ store.created_at }} </td> <td>{{ store.updated_at }}</td> <td>{{ store.serial_no}}</td> <td>{{ store.state }}</td> <td>{{ store.assigned_department }}</td>
+        </tr>
+        {% else %}
+        <div style="height:10px;"> <img src="{% static 'img/search.png' %}" height="45px;" style="margin-left:6px; margin-top:25px;"> </div>
+        <div style="margin-top:65px; margin-left:17px;"> No pending request</div>
+
+    </tbody>
+        {% endif %}
+</table>
+    {% endfor %}
+        </div>
+</div>
+
+<div id="Japan" class="tabcontent">
+    <div class="card bg-white">
+    <div align="left">
+          <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" style="margin-top:15px;" aria-label="Search">
+        </form>
+      </div>
+    {% for store in object_list %}
+    <table class="table text-white">
+        {% if store.approved == True %}
+    <thead>
+        <tr class="table-white">
+            <th></th><th>Item Name</th>  <th>Created At</th> <th>Last Updated</th> <th>Serial No</th> <th>State</th> <th>Assigned Department</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-white">
+            <td>#<td> {{ store.item_name }} </td>  <td> {{ store.created_at }} </td> <td>{{ store.updated_at }}</td> <td>{{ store.serial_no}}</td> <td>{{ store.state }}</td> <td>{{ store.assigned_department }}</td>
+        </tr>
+        {% else %}
+        <div style="height:10px;"> <img src="{% static 'img/search.png' %}" height="45px;" style="margin-left:6px; margin-top:25px;"> </div>
+        <div style="margin-top:65px; margin-left:17px;"> No pending request</div>
+
+    </tbody>
+        {% endif %}
+</table>
+    {% endfor %}
+    </div>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+{% endblock %}

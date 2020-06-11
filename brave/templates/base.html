@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+{%load static %}
+{% load scheduletags %}
+{% load crispy_forms_tags %}
+<head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta content="Preview page of Metronic Admin Theme #1 for statistics, charts, recent events and reports" name="description" />
+        <meta content="" name="author" />
+        <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    {% block style %}
+        <link rel="stylesheet" type="text/css" href="{% static 'fontawesome/css/all.min.css' %}" />
+    {% endblock %}
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&amp;subset=all" rel="stylesheet" type="text/css" />
+        <link href="{% static 'theme/assets/global/plugins/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'theme/assets/global/plugins/simple-line-icons/simple-line-icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'theme/assets/global/plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'theme/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- END GLOBAL MANDATORY STYLES -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <link href="{% static 'theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'theme/assets/global/plugins/morris/morris.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'theme/assets/global/plugins/fullcalendar/fullcalendar.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'theme/assets/global/plugins/jqvmap/jqvmap/jqvmap.css' %}" rel="stylesheet" type="text/css" />
+        <!-- END PAGE LEVEL PLUGINS -->
+        <!-- BEGIN THEME GLOBAL STYLES -->
+        <link href="{% static 'theme/assets/global/css/components.min.css' %}" rel="stylesheet" id="style_components" type="text/css" />
+        <link href="{% static 'theme/assets/global/css/plugins.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- END THEME GLOBAL STYLES -->
+        <!-- BEGIN THEME LAYOUT STYLES -->
+        <link href="{% static 'theme/assets/layouts/layout/css/layout.min.css' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static 'theme/assets/layouts/layout/css/themes/darkblue.min.css' %}" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="{% static 'theme/assets/layouts/layout/css/custom.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- END THEME LAYOUT STYLES -->
+        <link rel="shortcut icon" href="{% static 'favicon.ico' %}" />
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+        .page-sidebar{
+            overflow-y: hidden;
+        }
+
+        body {
+            background-repeat: no-repeat;
+            background-size: cover;
+            }
+        #ok {
+            height: 75px;
+            background-color:white;
+            color:#000000;
+        }
+        #footer {
+            background-color: #555d89;
+            position: fixed;
+            bottom: 0;
+            width: 88%;
+            margin-left:235px;
+            height:25px;
+            margin-top:200px;
+        }
+        /* Style the tab */
+        .tab {
+          overflow: hidden;
+          border: none;
+          background-color:#555d89;
+          margin-top: 0px;
+        }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+      float: left;
+      border: none;
+      outline: none;
+      background-color:#555d89;
+      cursor: pointer;
+      padding: 14px 36px;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border-top: none;
+    }
+    body {
+  color: #aaa;
+  font-family: 'Josefin Sans';
+}
+
+.calendar {
+  width: 350px;
+  margin: 50px auto 0;
+}
+
+.calendar__month {
+  font-size: 20px;
+  font-weight: 800;
+  padding: 10px 0;
+  width: 100%;
+  position: relative;
+}
+
+.cal-month__previous,
+.cal-month__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+
+  &:hover {
+    background-color: #42A5F5;
+    box-shadow: 0 5px 5px -5px rgba(0,0,0,0.75);
+    border-radius: 50%;
+    font-weight: 800;
+    color: #111;
+  }
+}
+
+.cal-month__next {
+  right: 0;
+}
+
+.cal-month__current {
+  text-align: center;
+  color: #e1e1e1;
+}
+
+.cal-head__day,
+.cal-body__day {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  float: left;
+}
+
+.cal-body__week,
+.calendar__head {
+  display: block;
+  height: 50px;
+  width: 350px;
+}
+
+.calendar__head {
+  line-height: 50px;
+  position: relative;
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #90CAF9;
+  }
+}
+
+.cal-body__day {
+  color: #777;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.cal-day__month--current {
+  color: #e1e1e1;
+}
+
+.cal-day__day--today {
+  font-weight: 800;
+  color: #2196f3;
+}
+
+.cal-day__day--selected {
+  background-color: #2196f3;
+  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, .75);
+  border-radius: 50%;
+  color: #111;
+}
+    </style>
+</head>
+    <!-- END HEAD -->
+
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+        <div class="page-wrapper">
+            <!-- BEGIN HEADER -->
+            <div class="page-header navbar navbar-fixed-top" id="ok">
+                <!-- BEGIN HEADER INNER -->
+                <div class="page-header-inner ">
+                    <!-- BEGIN LOGO -->
+                    <div class="page-logo">
+                        <div class="menu-toggler sidebar-toggler">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div >
+                        <a href="/">
+                            <img style="" height="40px;" width="150px;" src="{% static 'img/m.jpeg' %}" alt="logo" class="logo-default" /> </a>
+                    </div>
+                    <!-- END LOGO -->
+                    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span></span>
+                    </a>
+                    <!-- END RESPONSIVE MENU TOGGLER -->
+                    <!-- BEGIN TOP NAVIGATION MENU -->
+                    <div class="top-menu">
+                        <ul class="nav navbar-nav pull-right">
+                            <li class="dropdown dropdown-user">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                                    <span class="username username-hide-on-mobile"> Bookings </span>
+                                    <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-default">
+                                    <li>
+                                        <a href="{% url 'boardroom' calendar_slug='board-room-bookings' %}">
+                                            <i class="icon-user"></i> Book Boardroom </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'studio' calendar_slug='studio-bookings' %}">
+                                            <i class="icon-rocket"></i>Book a Studio
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="dropdown dropdown-user">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg" />
+                                    <span class="username username-hide-on-mobile"> Support </span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-default">
+                                    <li>
+                                        <a href="{% url 'sl' %}">
+                                            <i class="icon-user"></i> Request Item from store </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'if' %}">
+                                            <i class="icon-rocket"></i>Report Tech Problem
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="dropdown dropdown-user">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                    <img alt="" class="img-circle" src="../assets/layouts/layout/img/avatar3_small.jpg" />
+                                    <span class="username username-hide-on-mobile"> {{ user.first_name}} </span>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-default">
+                                    <li>
+                                        <a href="{% url 'p' %}">
+                                           <i class="fa fa-info" aria-hidden="true"></i>My Profile </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'password_change' %}">
+                                            <i class="icon-rocket"></i>Change My Password
+                                        </a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                        <a href="{% url 'logout' %}">
+                                            <i class="fas fa-sign-in" aria-hidden="true"></i> Sign Out </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li class="dropdown dropdown-user">
+                                <a href="{% url 'login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a>
+                            </li>
+                            {% endif %}
+                            <!-- END USER LOGIN DROPDOWN -->
+                        </ul>
+                    </div>
+                    <!-- END TOP NAVIGATION MENU -->
+                </div>
+                <!-- END HEADER INNER -->
+            </div>
+            <!-- END HEADER -->
+            <!-- BEGIN HEADER & CONTENT DIVIDER -->
+            <div class="clearfix"> </div>
+            <!-- END HEADER & CONTENT DIVIDER -->
+            <!-- BEGIN CONTAINER -->
+            <div class="page-container">
+                <!-- BEGIN SIDEBAR -->
+                <div class="page-sidebar-wrapper">
+                    <!-- BEGIN SIDEBAR -->
+                    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                    <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                    {% block sidebar %}
+                    <div class="page-sidebar navbar-collapse collapse">
+                        <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="false" data-slide-speed="200" style="background-color: #202643; padding-top: 20px;height: 100%; background-color: #202643;  width: 235px;">
+                            <li class="sidebar-toggler-wrapper hide">
+                                <div class="sidebar-toggler">
+                                    <span></span>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/" class="nav-link nav-toggle">
+                                    <i class="fas fa-home"></i>
+                                    <span class="title">Home</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'ho' %}" class="nav-link nav-toggle">
+                                    <i class="fas fa-pencil-square-o" aria-hidden="true"></i>
+                                    <span class="title">Communication</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'l' %}" class="nav-link nav-toggle">
+                                   <i class="fas fa-hashtag" aria-hidden="true"></i>
+                                    <span class="title">Awards</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'ind' %}" class="nav-link nav-toggle">
+                                    <i class="fas fa-tasks" aria-hidden="true"></i>
+                                    <span class="title">Roster</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="fas fa-calendar" aria-hidden="true"></i>
+                                    <span class="title">Scheduling</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'sl2' %}" class="nav-link nav-toggle">
+                                    <i class="fas fa-archive" aria-hidden="true"></i>
+                                    <span class="title">Store Manager</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'doc' %}" class="nav-link nav-toggle">
+                                    <i class="fas fa-file-text" aria-hidden="true"></i>
+                                    <span class="title">Docs</span>
+                                </a>
+                            </li>
+                            <li class="nav-item ">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="fas fa-inbox" aria-hidden="true"></i>
+                                    <span class="title">Issues</span>
+                                    <span class="arrow open"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item start active open">
+                                        <a href="{% url 'il2' %}" class="nav-link ">
+                                           <i class="fas fa-bug" aria-hidden="true"></i>
+                                            <span class="title">Raised Issues</span>
+                                            <span class="selected"></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item start ">
+                                        <a href="{% url 'il' %}" class="nav-link ">
+                                            <i class="fas fa-asterisk" aria-hidden="true"></i>
+                                            <span class="title">All Issues</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'dl' %}" class="nav-link nav-toggle">
+                                    <i class="fas fa-calendar-o" aria-hidden="true"></i>
+                                    <span class="title">Reports</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'project' calendar_slug='project' %}" class="nav-link nav-toggle">
+                                    <i class="fas fa-database" aria-hidden="true"></i>
+                                    <span class="title">Content Calendar</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="fas fa-briefcase" aria-hidden="true"></i>
+                                    <span class="title">Logistics</span>
+                                    <span class="selected"></span>
+                                    <span class="arrow open"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item start active open">
+                                        <a href="{% url 'v' %}" class="nav-link ">
+                                            <i class="fas fa-car" aria-hidden="true"></i>
+                                            <span class="title">Vehicle Manager</span>
+                                            <span class="selected"></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item start ">
+                                        <a href="{% url 'tr' %}" class="nav-link ">
+                                            <i class="fas fa-sticky-note" aria-hidden="true"></i>
+                                            <span class="title">Trip Logger</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item start ">
+                                        <a href="{% url 'mt' %}" class="nav-link ">
+                                            <i class="fas fa-line-chart" aria-hidden="true"></i>
+                                            <span class="title">Mileage Tracker</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            {% if user.is_staff %}
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="fas fa-user-plus" aria-hidden="true"></i>
+                                    <span class="title">Administration</span>
+                                    <span class="selected"></span>
+                                    <span class="arrow open"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li class="nav-item start active open">
+                                        <a href="{% url 'dept' %}" class="nav-link ">
+                                            <i class="fas fa-id-badge" aria-hidden="true"></i>
+                                            <span class="title">Manage Departments</span>
+                                            <span class="selected"></span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item start ">
+                                        <a href="{% url 'us' %}" class="nav-link ">
+                                            <i class="fas fa-user-o" aria-hidden="true"></i>
+                                            <span class="title">Manage User Accounts</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'indexf' %}" class="nav-link nav-toggle">
+                                    <i class="fas fa-bar-chart" aria-hidden="true"></i>
+                                    <span class="title">Analytics</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                        <!-- END SIDEBAR MENU -->
+                        <!-- END SIDEBAR MENU -->
+                    </div>
+                    {% endblock %}
+                    <!-- END SIDEBAR -->
+                </div>
+
+                <!-- END SIDEBAR -->
+                <!-- BEGIN CONTENT -->
+                <div class="page-content-wrapper">
+                    <!-- BEGIN CONTENT BODY -->
+                    <div class="page-content" style="background-color:#555d89;">
+                        {% block content %}
+                        {% endblock %}
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+        <footer class="footer" id="footer" >
+
+			<p class="copyright" align="center">Copyright &#64; <a href="http://keenthemes.com/" target="_blank">Keenthemes</a></p>
+		</footer>
+                </div>
+
+        <script src="{% static 'theme/assets/global/plugins/jquery.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/js.cookie.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jquery.blockui.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js' %}" type="text/javascript"></script>
+        <!-- END CORE PLUGINS -->
+        <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <script src="{% static 'theme/assets/global/plugins/moment.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/morris/morris.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/morris/raphael-min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/counterup/jquery.waypoints.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/counterup/jquery.counterup.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/amcharts/amcharts/amcharts.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/amcharts/amcharts/serial.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/amcharts/amcharts/pie.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/amcharts/amcharts/radar.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/amcharts/amcharts/themes/light.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/amcharts/amcharts/themes/patterns.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/amcharts/amcharts/themes/chalk.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/amcharts/ammap/ammap.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/amcharts/ammap/maps/js/worldLow.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/amcharts/amstockcharts/amstock.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/fullcalendar/fullcalendar.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/horizontal-timeline/horizontal-timeline.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/flot/jquery.flot.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/flot/jquery.flot.resize.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/flot/jquery.flot.categories.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jquery.sparkline.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js' %}" type="text/javascript"></script>
+        <!-- END PAGE LEVEL PLUGINS -->
+        <!-- BEGIN THEME GLOBAL SCRIPTS --> <script src="{% static 'js/calendar.js' %}" type="text/javascript" ></script>
+        <script src="{% static 'theme/assets/global/scripts/app.min.js' %}" type="text/javascript"></script>
+        <!-- END THEME GLOBAL SCRIPTS -->
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <script src="{% static 'theme/assets/pages/scripts/dashboard.min.js' %}" type="text/javascript"></script>
+        <!-- END PAGE LEVEL SCRIPTS -->
+        <!-- BEGIN THEME LAYOUT SCRIPTS -->
+        <script src="{% static 'theme/assets/layouts/layout/scripts/layout.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/layouts/layout/scripts/demo.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/layouts/global/scripts/quick-sidebar.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'theme/assets/layouts/global/scripts/quick-nav.min.js' %}" type="text/javascript"></script>
+
+        <!-- END THEME LAYOUT SCRIPTS -->
+
+            <script>
+    $(function () {
+        $('.datetime-input').datetimepicker({
+            format:'YYYY-MM-DD'
+        });
+    });
+    $(function () {
+        $('.datetime-input2').datetimepicker({
+            format:'HH:mm:ss'
+        });
+    });
+    $(function () {
+        $('.datetime-input3').datetimepicker({
+            format:'HH:mm:ss'
+        });
+    });
+</script>
+<!-- End -->
+</body>
+
+
+</html>

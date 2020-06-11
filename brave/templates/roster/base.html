@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+{%load static %}
+{% load crispy_forms_tags %}
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>{% block title %}Roster{% endblock title %}</title>
+  </head>
+
+  <body style="background-color:#555d89;">
+    <nav class="navbar fixed-top navbar-expand-xl navbar-dark bg-dark mb-4">
+      <a class="navbar-brand" href="{% url 'home' %}">Brave Roster</a>
+      {% if user.is_authenticated %}
+      {% endif %}
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        {% if user.is_authenticated %}
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <div class="dropdown">
+                  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                      Staff
+                  </button>  
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'user_list' %}">Display Staff</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'role_list' %}">Display Staff by Role</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'user_new' %}">Create New Staff Member</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'role_new' %}">Create New Role</a>
+                  </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                      Day Groups
+                  </button>  
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'day_group_list' %}">Display Day Groups</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'day_group_new' %}">Create New Day Group</a>
+                      <div class="dropdown-divider"></div>
+                      <!--<a class="dropdown-item" href="{% url 'day_list' %}">Display Days</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'day_new' %}">Create New Day</a>
+                      <div class="dropdown-divider"></div>-->
+                      <a class="dropdown-item" href="{% url 'day_set_new' %}">Set Number of Days</a>
+                  </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                      Shifts
+                  </button>  
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'shift_list' %}">Display Shifts</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'shift_new' %}">Create New Shift</a>
+                  </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                      Skill Mix
+                  </button>  
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'shift_rule_list' %}">Display Skill Mix Rules</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'shift_rule_new' %}">Create New Skill Mix Rule</a>
+                  </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                      Shift Sequences
+                  </button>  
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'staff_rule_list' %}">Display Shift Sequences</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'staff_rule_new' %}">Create New Shift Sequence</a>
+                  </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                      Leave
+                  </button>  
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'leave_list' %}">Display Leave</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'leave_new' %}">Create New Leave</a>
+                  </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                      Staff Requests
+                  </button>  
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'preference_list' %}">Display Staff Requests</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'staff_request_list' %}">Create Staff Requests</a>
+                  </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <div class="dropdown">
+                  <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown">
+                      Roster
+                  </button>  
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" href="{% url 'timeslot_list' %}">Display Roster by Day</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'roster_list' %}">Display Roster by Staff</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'select_roster' %}">Select Roster Period</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'generate_roster' %}">Generate New Roster</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'download_csv' %}">Download Roster as CSV File</a>
+                  </div>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-warning" href="{% url 'select_roster' %}">Period: {{ request.session.start_date }}</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ user.username }}
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenu">
+                <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'logout' %}">
+                Log Out</a>
+              </div>
+            </li>
+          </ul>
+        {% else %}
+          <form class="form-inline ml-auto">
+            <a href="{% url 'login' %}" class="btn btn-outline-secondary">
+            Log In</a>
+          </form>
+        {% endif %}
+      </div>
+    </nav>
+    <div class="container-fluid" style="margin-top:80px">
+      {% if messages %}
+      <div class="messages alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {% for message in messages %}
+          <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+          {% endfor %}
+      </div>
+      {% endif %}
+      {% block content-wide %}
+      <div class="container">
+        {% block content %}
+        {% endblock content %}
+      </div>
+      {% endblock content-wide %}
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{% static "js/processing.js" %}"></script>
+  </body>
+</html>

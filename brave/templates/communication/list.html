@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12">
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Welcome to Brave</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Notifications</button>
+</div>
+
+    <div id="Paris" class="tabcontent">
+        <p><h4>Brave is a production system which gives control over inventory, use of assets while optimizing the whole team for maximum output.</h4></p>
+    <br>
+       <h4 align="center"><b>Modules</b></h4>
+        <p><h4><b>BOOKING MANAGER</b></h4></p>
+    Provides Studio Bookings, Location Production Bookings, OB Van Bookings, Satellite Bookings, Boardroom Bookings and Transport Bookings all to be made within the program with permissions given to those who require them. The module allows resource planning effectively in terms of personnel and also use of production cars and fuel consumption. This is presented graphically both to the required supervisor on any display.
+    <br>
+    <br>
+    <p><h4><b>STORE MANAGER</b></h4></p>
+    Provides the requisition of services and hardware items and the tracking of the same with warning alerts when items are overdue. Consumables Inventory and Stock Taking can all be performed and depreciation values shown for easy accounting.
+    <br>
+    <br>
+    <p><h4><b>SERVICE MANAGER</b></h4></p>
+    Provides the electronic raising of support tickets to make the work of the Broadcast and IT Engineers more efficient and also reveal the progress of a support issue. It also creates a database for the station. This helps in ISO certification
+    <br>
+    <br>
+    <p><h4><b>COMPANY HIGHLIGHTS AND EVENTS DISPLAY</b></h4></p>
+    Provides Digital Signage to monitors throughout the station to A) Build the Family feeling with Employee of the month, Birthdays, Goof of the week, Show of the week, Company events and B) display Organisation Key Performance Index (KPI) for the number of You Tube stories, Instagram stories, Facebook stories and Breaking News Stories as a target for the year and how well the station is doing as the year progresses. The Broadcast Dashboard displays in the relevant department tasks assigned to different people in that department on a particular day. It is like a public Calendar within the department.
+    <br>
+    <br>
+    <p><h4><b>REPORT CALENDAR</b></h4></p>
+    This module provides reports on Shift Rosters and Handovers so the Studio, Production Department, Engineers and IT can all see who is on duty and going to be on duty in the future.
+    <br>
+    <br>
+    <p><h4><b>CONTENT CALENDAR</b></h4></p>
+    This Module show all the events of note that are happening with the area the Station covers for the coming year. For example, Independence Days, Marathons, State Visits, International days like Women’s Day, Labour Day or Aids Day. This allows the Production Department to plan in advance productions required for these events.
+    </div>
+    </div>
+    <div id="Tokyo" class="tabcontent">
+        <div class="card bg-white">
+  <div class="card-body">
+      <div align="left">
+          <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" style="margin-top:15px;" aria-label="Search">
+        </form>
+      </div>
+      <div align="right">
+        <a href="{% url 'docf' %}"><button type="submit" class="btn btn-primary text-white" style="height:50px; margin-left:10px;">Create</button></a>
+      </div>
+      <form action="" method="post">
+       {% csrf_token %}
+<div align="center" class="mt-2" >
+<table class="table text-white">
+    <thead>
+        <tr class="table-white">
+
+        </tr>
+        <tr class="table-white">
+            <th>Notification Title</th>  <th>Notification File</th> <th>Filename</th> <th>Last Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+
+</table>
+</div>
+</form>
+  </div>
+</div>
+    </div>
+</div>
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
+
+{% endblock %}

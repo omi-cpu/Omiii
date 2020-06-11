@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Users{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4"><img src="{% static 'img/p.png' %}" height="135px;" style="margin-left:85px; margin-top:25px;"></div>
+    <div class="col-sm-4"></div>
+
+</div>
+<h3 align="center"><b>User Accounts</b></h3>
+<div class="row card bg-white" style="margin-top:15px;">
+    <div class="col-sm-12">
+<div align="right">
+    <a href="{% url 'usc' %}"><button type="submit" class="btn btn-primary text-white">Add User</button></a>
+</div>
+
+<form action="" method="post">
+       {% csrf_token %}
+<div align="center" class="mt-2" >
+<table class="table text-white">
+    <thead>
+        <tr class="table-white">
+            <th>Username</th>  <th>Full Name</th>  <th>Email</th> <th>Department</th> <th>Active</th> <th>Role</th>
+    </thead>
+    <tbody>
+        {% for users in object_list %}
+        <tr class="table-white">
+            <td> {{ users.username }} </td>  <td> {{ users.first_name }} {{ users.last_name}} </td> <td> {{ users.email}} </td> <td> {{ users.department}} </td>  <td> {{ users.is_active}} </td>
+        </tr>
+        {% empty %}
+    <ul><li>No Users</li></ul>
+        {% endfor %}
+    </tbody>
+
+</table>
+</div>
+</form></div>
+</div>
+{% endblock %}
